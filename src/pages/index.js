@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import React,{useState,useEffect} from 'react';
 import { Box, Container, Grid } from '@mui/material';
 import { Budget } from '../components/dashboard/budget';
 import { LatestOrders } from '../components/dashboard/latest-orders';
@@ -9,12 +10,22 @@ import { TotalCustomers } from '../components/dashboard/total-customers';
 import { TotalProfit } from '../components/dashboard/total-profit';
 import { TrafficByDevice } from '../components/dashboard/traffic-by-device';
 import { DashboardLayout } from '../components/dashboard-layout';
+import SensorData from '../components/dashboard/SensorData'
+import { getDatabase, ref, onValue} from "firebase/database";
+//icons
 
-const Dashboard = () => (
-  <>
+const Dashboard = () => {
+  const db = getDatabase();
+  const Dataref = ref(db, '/Sensors');
+  onValue(Dataref, (snapshot) => {
+    const data = snapshot.val();
+    console.log(data)
+  });  
+  return(
+  <div>
     <Head>
       <title>
-        Dashboard | Material Kit
+        Dashboard | Lambda Team
       </title>
     </Head>
     <Box
@@ -36,7 +47,7 @@ const Dashboard = () => (
             xl={3}
             xs={12}
           >
-            <Budget />
+            <SensorData name = "Presión" node = "Sensors/Pressure" icon = "Air" color = "#6F38C5" units= "PSI" linearProgress = {true}/>
           </Grid>
           <Grid
             item
@@ -45,7 +56,7 @@ const Dashboard = () => (
             sm={6}
             xs={12}
           >
-            <TotalCustomers />
+            <SensorData name = "Temperatura" node = "Sensors/Temperature" color = "#ff3d00" icon = "LocalFireDepartment" units= "Celcius" linearProgress = {true}/>
           </Grid>
           <Grid
             item
@@ -54,7 +65,7 @@ const Dashboard = () => (
             sm={6}
             xs={12}
           >
-            <TasksProgress />
+            <SensorData name = "Humedad" node = "Sensors/Humidity" color = "#87A2FB" icon = "Water" units= "Celcius"/>
           </Grid>
           <Grid
             item
@@ -63,7 +74,7 @@ const Dashboard = () => (
             sm={6}
             xs={12}
           >
-            <TotalProfit sx={{ height: '100%' }} />
+            <SensorData name = "CO2" node = "Sensors/quality" color = "#1C6758" icon = "Park" units= "ppm" />
           </Grid>
           <Grid
             item
@@ -72,7 +83,7 @@ const Dashboard = () => (
             xl={9}
             xs={12}
           >
-            <Sales />
+            {/* <Sales /> */}
           </Grid>
           <Grid
             item
@@ -81,7 +92,7 @@ const Dashboard = () => (
             xl={3}
             xs={12}
           >
-            <TrafficByDevice sx={{ height: '100%' }} />
+            {/* <TrafficByDevice sx={{ height: '100%' }} />
           </Grid>
           <Grid
             item
@@ -99,13 +110,14 @@ const Dashboard = () => (
             xl={9}
             xs={12}
           >
-            <LatestOrders />
+            <LatestOrders /> */}
           </Grid>
         </Grid>
       </Container>
     </Box>
-  </>
-);
+  </div>
+  )
+};
 
 Dashboard.getLayout = (page) => (
   <DashboardLayout>
@@ -114,3 +126,5 @@ Dashboard.getLayout = (page) => (
 );
 
 export default Dashboard;
+
+   

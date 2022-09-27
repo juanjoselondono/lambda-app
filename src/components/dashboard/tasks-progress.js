@@ -39,7 +39,7 @@ export const TasksProgress = (props) => (
           </Avatar>
         </Grid>
       </Grid>
-      <Box sx={{ pt: 3 }}>
+      <Box>
         <LinearProgress
           value={75.5}
           variant="determinate"

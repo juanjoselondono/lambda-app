@@ -17,7 +17,7 @@ export const TrafficByDevice = (props) => {
         hoverBorderColor: '#FFFFFF'
       }
     ],
-    labels: ['Desktop', 'Tablet', 'Mobile']
+    labels: ['Porcentaje CO2', 'Tablet', 'Mobile']
   };
 
   const options = {
@@ -65,7 +65,7 @@ export const TrafficByDevice = (props) => {
 
   return (
     <Card {...props}>
-      <CardHeader title="Traffic by Device" />
+      <CardHeader title="Calidad del aire" />
       <Divider />
       <CardContent>
         <Box
