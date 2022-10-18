@@ -69,7 +69,7 @@ const Dashboard = () => {
             sm={6}
             xs={12}
           >
-            <SensorData name = "Humedad" node = "Sensors/Humidity" color = "#87A2FB" icon = "Water" units= "Celcius"/>
+            <SensorData name = "Humedad" node = "Sensors/Humidity" color = "#87A2FB" icon = "Water" units= "%"/>
           </Grid>
           <Grid
             item
