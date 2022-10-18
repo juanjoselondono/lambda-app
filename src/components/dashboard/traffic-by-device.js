@@ -1,12 +1,98 @@
 import { Doughnut } from 'react-chartjs-2';
-import { Box, Card, CardContent, CardHeader, Divider, Typography, useTheme } from '@mui/material';
+import { Box, Avatar, Card, CardContent, CardHeader, Divider, Typography, useTheme } from '@mui/material';
 import LaptopMacIcon from '@mui/icons-material/LaptopMac';
 import PhoneIcon from '@mui/icons-material/Phone';
 import TabletIcon from '@mui/icons-material/Tablet';
+import { useState, useEffect } from 'react';
+import Icons from '../hooks/icons'
 
 export const TrafficByDevice = (props) => {
   const theme = useTheme();
+  const [label, setLabel] = useState("");
+  const Icono =  Icons("Mood")  // not the name should start with capital letter in case you use reactjs
+  const Bad = Icons("Warning")
+  const Neutral = Icons("SentimentNeutral")
+  const Good = Icons("SentimentSatisfied")
+  useEffect(()=>{
+    if(props.data.quality < 600){
+      setLabel(
+      <div>
+        <Typography
+        color="textSecundary"
+        variant="h5"
+        sx = {{textAlign:'center', justifyContent:'center'}}
+        >Calidad del aire excelente 
+        </Typography>
+        <Typography sx = {{textAlign:'center', justifyContent:'center'}}><Icono></Icono></Typography>
+        <br></br>
+        <Typography
+        color="textSecundary"
+        variant="h7"
+        >Puede respirar tranquilamente y disfrutar de un aire puro.
+        </Typography>
+      </div>
+      )
+    }
+    else if(props.data.quality >600 && props.data.quality < 1000){
+      setLabel(
+        <div>
+          <Typography
+          color="textSecundary"
+          variant="h5"
+          >Calidad del aire aceptable 
+          </Typography>
+          <br></br>
+          <Typography sx = {{textAlign:'center', justifyContent:'center'}}><Good></Good></Typography>
+          <Typography
+            color="textSecundary"
+            variant="h7"
+            >
+        </Typography>
+        </div>
 
+      )
+    }
+    else if(props.data.quality >1000 && props.data.quality < 1500){
+      setLabel(
+        <div>
+        <Typography
+        color="textSecundary"
+        variant="h5"
+        sx = {{textAlign:'center', justifyContent:'center'}}
+        >Calidad del aire mediocre 
+        </Typography>
+        <br></br>
+          <Typography sx = {{textAlign:'center', justifyContent:'center'}}><Neutral></Neutral></Typography>
+          <Typography
+            color="textSecundary"
+            variant="h7"
+            >
+              Aire contaminado. Se recomienda ventilación.
+        </Typography>
+      </div>
+      )
+    }
+    else if(props.data.quality > 1500){
+      setLabel(
+        <div>
+        <Typography
+        color="textSecundary"
+        variant="h5"
+        >Calidad del aire pésima. Se recomienda ventilación 
+        </Typography>
+        <br></br>
+          <Typography sx = {{textAlign:'center', justifyContent:'center'}}><Bad></Bad></Typography>
+          <Typography
+            color="textSecundary"
+            sx = {{textAlign:'center', justifyContent:'center'}}
+            variant="h7"
+            >
+              Aire altamente contaminado. Se recomienda ventilación y poco esfuerzo físico
+        </Typography>
+      </div>
+      )
+    }
+  })
   const data = {
     datasets: [
       {
@@ -17,7 +103,7 @@ export const TrafficByDevice = (props) => {
         hoverBorderColor: '#FFFFFF'
       }
     ],
-    labels: ['Porcentaje CO2', 'Tablet', 'Mobile']
+    labels: ['Porcentaje CO2', 'Porcetaje GLP', 'Porcentaje O2']
   };
 
   const options = {
@@ -41,43 +127,22 @@ export const TrafficByDevice = (props) => {
       titleFontColor: theme.palette.text.primary
     }
   };
-
-  const devices = [
-    {
-      title: 'Desktop',
-      value: 63,
-      icon: LaptopMacIcon,
-      color: '#3F51B5'
-    },
-    {
-      title: 'Tablet',
-      value: 15,
-      icon: TabletIcon,
-      color: '#E53935'
-    },
-    {
-      title: 'Mobile',
-      value: 23,
-      icon: PhoneIcon,
-      color: '#FB8C00'
-    }
-  ];
-
   return (
     <Card {...props}>
-      <CardHeader title="Calidad del aire" />
+      <CardHeader title="Analisis Calidad del aire" />
       <Divider />
       <CardContent>
         <Box
           sx={{
             height: 300,
-            position: 'relative'
+            display:'flex',
+            flexDirection:'row'
           }}
         >
           <Doughnut
             data={data}
             options={options}
-          />
+          /> 
         </Box>
         <Box
           sx={{
@@ -86,35 +151,7 @@ export const TrafficByDevice = (props) => {
             pt: 2
           }}
         >
-          {devices.map(({
-            color,
-            icon: Icon,
-            title,
-            value
-          }) => (
-            <Box
-              key={title}
-              sx={{
-                p: 1,
-                textAlign: 'center'
-              }}
-            >
-              <Icon color="action" />
-              <Typography
-                color="textPrimary"
-                variant="body1"
-              >
-                {title}
-              </Typography>
-              <Typography
-                style={{ color }}
-                variant="h4"
-              >
-                {value}
-                %
-              </Typography>
-            </Box>
-          ))}
+          {label}
         </Box>
       </CardContent>
     </Card>

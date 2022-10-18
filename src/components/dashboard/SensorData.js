@@ -3,6 +3,11 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { getDatabase, ref, onValue} from "firebase/database";
 import React,{useState,useEffect} from 'react';
 import Icons from '../hooks/icons'
+import {createStore, useGlobalState} from 'state-pool';
+
+const store = createStore();  // Create a store for storing our global state
+store.setState("count", 0);
+
 const sensorData = (props) => {
     const [response, setResponse] = useState("");
     const db = getDatabase();
@@ -10,13 +15,14 @@ const sensorData = (props) => {
     const Icono =  Icons(props.icon)  // not the name should start with capital letter in case you use reactjs
     const color = props.color;
     const units = props.units;
+    
     const showLinearProgress = props.linearProgress || false; 
     useEffect(()=>{
         onValue(Dataref, (snapshot) => {
             const data = snapshot.val();
-            console.log(data)
             setResponse(data)
           });
+        
     })  
     return(
     <Card>
@@ -39,6 +45,14 @@ const sensorData = (props) => {
                 variant="h4"
             >
                 {response}
+                <Typography
+                    color="textPrimary"
+                    gutterBottom
+                    variant="overline"
+                    style={{margin:'1rem', fontSize: '0.8rem'}}
+                    >
+                        {units}
+                </Typography>
             </Typography>
             </Grid>
             <Grid item>
@@ -57,25 +71,17 @@ const sensorData = (props) => {
             {
                 showLinearProgress == true &&
                 <div>
-                <Box sx={{ pt: 3, color:  'blue'}}>
-                    <LinearProgress
-                    value={response}
-                    variant="determinate"
-                    />
-                </Box>
+                    <Box sx={{ pt: 3, color:  'blue'}}>
+                        <LinearProgress
+                        value={response}
+                        variant="determinate"
+                        />
+                    </Box>
                 </div>
             }
             </Grid>
         </CardContent>
         <Grid Item>
-        <Typography
-            color="textSecondary"
-            gutterBottom
-            variant="overline"
-            style={{margin:'1rem'}}
-            >
-                {units}
-        </Typography>
         </Grid>
     </Card>
     )

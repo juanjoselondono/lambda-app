@@ -11,16 +11,20 @@ import { TotalProfit } from '../components/dashboard/total-profit';
 import { TrafficByDevice } from '../components/dashboard/traffic-by-device';
 import { DashboardLayout } from '../components/dashboard-layout';
 import SensorData from '../components/dashboard/SensorData'
+import Analysis from '../components/Analysis/analysis';
 import { getDatabase, ref, onValue} from "firebase/database";
 //icons
-
 const Dashboard = () => {
   const db = getDatabase();
+  const [response, setResponse] = useState("");
   const Dataref = ref(db, '/Sensors');
-  onValue(Dataref, (snapshot) => {
-    const data = snapshot.val();
-    console.log(data)
-  });  
+  useEffect(()=>{
+    onValue(Dataref, (snapshot) => {
+        const data = snapshot.val();
+        setResponse(data)
+      });
+    
+  })  
   return(
   <div>
     <Head>
@@ -78,12 +82,22 @@ const Dashboard = () => {
           </Grid>
           <Grid
             item
-            lg={8}
+            lg={12}
             md={12}
-            xl={9}
+            xl={12}
             xs={12}
           >
             {/* <Sales /> */}
+            <TrafficByDevice data = {response} sx={{ height: '100%' }} />
+          </Grid>
+          <Grid
+            item
+            lg={12}
+            md={12}
+            xl={12}
+            xs={12}
+          >
+            <Sales></Sales>
           </Grid>
           <Grid
             item
@@ -92,15 +106,7 @@ const Dashboard = () => {
             xl={3}
             xs={12}
           >
-            {/* <TrafficByDevice sx={{ height: '100%' }} />
-          </Grid>
-          <Grid
-            item
-            lg={4}
-            md={6}
-            xl={3}
-            xs={12}
-          >
+            {/*
             <LatestProducts sx={{ height: '100%' }} />
           </Grid>
           <Grid
