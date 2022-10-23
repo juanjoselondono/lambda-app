@@ -5,6 +5,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import TabletIcon from '@mui/icons-material/Tablet';
 import { useState, useEffect } from 'react';
 import Icons from '../hooks/icons'
+import { getDatabase, ref, onValue} from "firebase/database";
 
 export const TrafficByDevice = (props) => {
   const theme = useTheme();
@@ -13,8 +14,14 @@ export const TrafficByDevice = (props) => {
   const Bad = Icons("Warning")
   const Neutral = Icons("SentimentNeutral")
   const Good = Icons("SentimentSatisfied")
+  const response = {
+    quality :props.co2
+  }
+  const co2Percentage = props.co2/100000
+  const glpPercentage = props.glp/100000
+  const coPercentage = props.co/100000
   useEffect(()=>{
-    if(props.data.quality < 600){
+    if(response.quality < 600){
       setLabel(
       <div>
         <Typography
@@ -33,7 +40,7 @@ export const TrafficByDevice = (props) => {
       </div>
       )
     }
-    else if(props.data.quality >600 && props.data.quality < 1000){
+    else if(response.quality >600 && response.quality < 1000){
       setLabel(
         <div>
           <Typography
@@ -52,7 +59,7 @@ export const TrafficByDevice = (props) => {
 
       )
     }
-    else if(props.data.quality >1000 && props.data.quality < 1500){
+    else if(response.quality >1000 && response.quality < 1500){
       setLabel(
         <div>
         <Typography
@@ -72,7 +79,7 @@ export const TrafficByDevice = (props) => {
       </div>
       )
     }
-    else if(props.data.quality > 1500){
+    else if(response.quality > 1500){
       setLabel(
         <div>
         <Typography
@@ -92,18 +99,18 @@ export const TrafficByDevice = (props) => {
       </div>
       )
     }
-  })
+  },[response.quality])
   const data = {
     datasets: [
       {
-        data: [63, 15, 22],
+        data: [co2Percentage, glpPercentage, coPercentage],
         backgroundColor: ['#3F51B5', '#e53935', '#FB8C00'],
         borderWidth: 8,
         borderColor: '#FFFFFF',
         hoverBorderColor: '#FFFFFF'
       }
     ],
-    labels: ['Porcentaje CO2', 'Porcetaje GLP', 'Porcentaje O2']
+    labels: ['Porcentaje CO2', 'Porcetaje GLP', 'Porcentaje CO']
   };
 
   const options = {

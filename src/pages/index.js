@@ -11,20 +11,24 @@ import { TotalProfit } from '../components/dashboard/total-profit';
 import { TrafficByDevice } from '../components/dashboard/traffic-by-device';
 import { DashboardLayout } from '../components/dashboard-layout';
 import SensorData from '../components/dashboard/SensorData'
+import Sensors from 'src/components/dashboard/Sensors';
 import Analysis from '../components/Analysis/analysis';
 import { getDatabase, ref, onValue} from "firebase/database";
 //icons
 const Dashboard = () => {
-  const db = getDatabase();
-  const [response, setResponse] = useState("");
-  const Dataref = ref(db, '/Sensors');
-  useEffect(()=>{
-    onValue(Dataref, (snapshot) => {
-        const data = snapshot.val();
-        setResponse(data)
-      });
-    
-  })  
+    const [response, setResponse] = useState("");
+    const db = getDatabase();
+    const Dataref = ref(db,'Sensors');
+    var state;
+    useEffect(()=>{
+        onValue(Dataref,(snapshot) => {
+            var data = snapshot.val();
+            state = data;
+            setResponse(data)
+          });
+        
+    }, [state])  
+    console.log(response)
   return(
   <div>
     <Head>
@@ -44,42 +48,7 @@ const Dashboard = () => {
           container
           spacing={3}
         >
-          <Grid
-            item
-            lg={3}
-            sm={6}
-            xl={3}
-            xs={12}
-          >
-            <SensorData name = "Presión" node = "Sensors/Pressure" icon = "Air" color = "#6F38C5" units= "PSI" linearProgress = {true}/>
-          </Grid>
-          <Grid
-            item
-            xl={3}
-            lg={3}
-            sm={6}
-            xs={12}
-          >
-            <SensorData name = "Temperatura" node = "Sensors/Temperature" color = "#ff3d00" icon = "LocalFireDepartment" units= "Celcius" linearProgress = {true}/>
-          </Grid>
-          <Grid
-            item
-            xl={3}
-            lg={3}
-            sm={6}
-            xs={12}
-          >
-            <SensorData name = "Humedad" node = "Sensors/Humidity" color = "#87A2FB" icon = "Water" units= "%"/>
-          </Grid>
-          <Grid
-            item
-            xl={3}
-            lg={3}
-            sm={6}
-            xs={12}
-          >
-            <SensorData name = "CO2" node = "Sensors/quality" color = "#1C6758" icon = "Park" units= "ppm" />
-          </Grid>
+        <Sensors rtdata = {response}></Sensors>
           <Grid
             item
             lg={12}
@@ -88,7 +57,7 @@ const Dashboard = () => {
             xs={12}
           >
             {/* <Sales /> */}
-            <TrafficByDevice data = {response} sx={{ height: '100%' }} />
+            <TrafficByDevice co={response.co} glp = {response.glp} co2 = {response.quality} sx={{ height: '100%' }} />
           </Grid>
           <Grid
             item
@@ -98,25 +67,6 @@ const Dashboard = () => {
             xs={12}
           >
             <Sales></Sales>
-          </Grid>
-          <Grid
-            item
-            lg={4}
-            md={6}
-            xl={3}
-            xs={12}
-          >
-            {/*
-            <LatestProducts sx={{ height: '100%' }} />
-          </Grid>
-          <Grid
-            item
-            lg={8}
-            md={12}
-            xl={9}
-            xs={12}
-          >
-            <LatestOrders /> */}
           </Grid>
         </Grid>
       </Container>

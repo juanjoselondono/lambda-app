@@ -91,6 +91,7 @@ export const DashboardSidebar = (props) => {
                   color="neutral.400"
                   variant="body2"
                 >
+                  Escuela De Ingeniería EIA
                 </Typography>
               </div>
 
@@ -103,15 +104,75 @@ export const DashboardSidebar = (props) => {
             my: 3
           }}
         />
-        <Box sx={{ flexGrow: 1 }}>
-          {items.map((item) => (
-            <NavItem
-              key={item.title}
-              icon={item.icon}
-              href={item.href}
-              title={item.title}
-            />
-          ))}
+        <Box sx={{ flexGrow: 1, textAlign:'center'}}>
+        <Typography
+                  color="neutral.400"
+                  variant="body2"
+                >
+                  Juan José Londoño David
+          </Typography>
+          <Typography
+                  color="neutral.400"
+                  variant="body2"
+                >
+                  Sebastián Molina Puerta
+          </Typography>
+          <Typography
+                  color="neutral.400"
+                  variant="body2"
+                >
+                  Miguel Angel Conrado
+          </Typography>
+          <Typography
+                  color="neutral.400"
+                  variant="body2"
+                >
+                  Julián Álvarez Ortiz
+          </Typography>
+          <Typography
+                  color="neutral.400"
+                  variant="body2"
+                >
+                  Alejandro Marín Gomez
+          </Typography>
+          <Typography
+                  color="neutral.400"
+                  variant="body2"
+                >
+                  Luis Felipe Rendón
+          </Typography>
+          <div>
+          <Box
+              sx={{
+                alignItems: 'center',
+                backgroundColor: ' #transparent ',
+                cursor: 'pointer',
+                display: 'flex',
+                flexDirection:'column',
+                justifyContent: 'space-between',
+                px: 3,
+                py: '11px',
+                borderRadius: 1,
+                margin:5,
+                color:'white',
+                marginTop:'60%',
+                borderColor: 'white'
+              }}
+            >
+                <Typography
+                  color="inherit"
+                  variant="subtitle1"
+                >
+                  ©2022
+                </Typography>
+                <Typography
+                  color="inherit"
+                  variant="subtitle1"
+                >
+                    <a style={{color:'white'}} href='https://juanlondonod.ml/'>https://juanlondonod.ml/</a>
+                </Typography>
+                </Box>
+          </div>
         </Box>
         <Divider sx={{ borderColor: '#2D3748' }} />
         <Box

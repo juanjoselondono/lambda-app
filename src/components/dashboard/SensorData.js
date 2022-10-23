@@ -5,9 +5,6 @@ import React,{useState,useEffect} from 'react';
 import Icons from '../hooks/icons'
 import {createStore, useGlobalState} from 'state-pool';
 
-const store = createStore();  // Create a store for storing our global state
-store.setState("count", 0);
-
 const sensorData = (props) => {
     const [response, setResponse] = useState("");
     const db = getDatabase();
@@ -15,15 +12,7 @@ const sensorData = (props) => {
     const Icono =  Icons(props.icon)  // not the name should start with capital letter in case you use reactjs
     const color = props.color;
     const units = props.units;
-    
-    const showLinearProgress = props.linearProgress || false; 
-    useEffect(()=>{
-        onValue(Dataref, (snapshot) => {
-            const data = snapshot.val();
-            setResponse(data)
-          });
-        
-    })  
+
     return(
     <Card>
         <CardContent>
@@ -43,13 +32,14 @@ const sensorData = (props) => {
             <Typography
                 color="textPrimary"
                 variant="h4"
+                id={Dataref || "none"}
             >
-                {response}
+                {props.data || "cargando"}
                 <Typography
                     color="textPrimary"
                     gutterBottom
                     variant="overline"
-                    style={{margin:'1rem', fontSize: '0.8rem'}}
+                    style={{margin:'0.5', fontSize: '0.8rem'}}
                     >
                         {units}
                 </Typography>
@@ -67,19 +57,6 @@ const sensorData = (props) => {
             </Avatar>
             </Grid>
         </Grid>
-        <Grid Item>
-            {
-                showLinearProgress == true &&
-                <div>
-                    <Box sx={{ pt: 3, color:  'blue'}}>
-                        <LinearProgress
-                        value={response}
-                        variant="determinate"
-                        />
-                    </Box>
-                </div>
-            }
-            </Grid>
         </CardContent>
         <Grid Item>
         </Grid>
