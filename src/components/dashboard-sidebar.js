@@ -155,7 +155,7 @@ export const DashboardSidebar = (props) => {
                 borderRadius: 1,
                 margin:5,
                 color:'white',
-                marginTop:'60%',
+                marginTop:'10vh',
                 borderColor: 'white'
               }}
             >

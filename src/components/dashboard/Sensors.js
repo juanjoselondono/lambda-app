@@ -27,7 +27,7 @@ const Sensors = (props) => {
     
         value: datos.Pressure,
         name: "Presión átmosferica",
-        units: "atm",
+        units: "Pascales",
         icon: "Air",
         color:"#6F38C5",
         key:3
