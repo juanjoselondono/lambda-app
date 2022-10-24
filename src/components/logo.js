@@ -4,9 +4,9 @@ import { styled } from '@mui/material/styles';
 export const Logo = styled((props) => {
   return (
     <img style = {{
-      width:"10rem",
+      width:"14rem",
       justifySelf:"center"
-    }}src = "/logo.jpeg"></img>
+    }}src = "/logo.png"></img>
   );
 })``;
 
