@@ -19,7 +19,7 @@ export const Sales = (props) => {
         maxBarThickness: 10
       },
       {
-        backgroundColor: '#EEEEEE',
+        backgroundColor: '#',
         barPercentage: 0.5,
         barThickness: 12,
         borderRadius: 4,
@@ -49,7 +49,7 @@ export const Sales = (props) => {
         maxBarThickness: 10
       }
     ],
-    labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug', '7 aug']
+    labels: ['1h', '2h', '3h', '4h', '5h', '6h', '7h']
   };
 
   const options = {

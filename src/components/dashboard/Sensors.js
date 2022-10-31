@@ -14,15 +14,6 @@ const Sensors = (props) => {
         color:"#ff3d00",
         key: 1
     },
-    {
-    
-        value: datos.Humidity,
-        name: "Humedad",
-        units: "%",
-        icon: "Water",
-        color:"#87A2FB",
-        key:2
-    },
     { 
     
         value: datos.Pressure,
