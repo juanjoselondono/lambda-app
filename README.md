@@ -1,4 +1,4 @@
-##LAMBDA APP EIA
+## LAMBDA APP EIA
 Dashboard IOT app for air quality monitoring
 ## RUN APP: https://lambda-app.vercel.app/
 
