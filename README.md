@@ -8,4 +8,5 @@ Dashboard IOT app for air quality monitoring
 
 ## Contact Us
 
-- Email Us: support@deviasio.zendesk.com
+- Email me: juanjoselondonodavid@gmail.com
+
