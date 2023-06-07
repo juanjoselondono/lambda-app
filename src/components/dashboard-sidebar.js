@@ -105,41 +105,11 @@ export const DashboardSidebar = (props) => {
           }}
         />
         <Box sx={{ flexGrow: 1, textAlign:'center'}}>
-        <Typography
+          <Typography
                   color="neutral.400"
                   variant="body2"
                 >
                   Juan José Londoño David
-          </Typography>
-          <Typography
-                  color="neutral.400"
-                  variant="body2"
-                >
-                  Sebastián Molina Puerta
-          </Typography>
-          <Typography
-                  color="neutral.400"
-                  variant="body2"
-                >
-                  Miguel Angel Conrado
-          </Typography>
-          <Typography
-                  color="neutral.400"
-                  variant="body2"
-                >
-                  Julián Álvarez Ortiz
-          </Typography>
-          <Typography
-                  color="neutral.400"
-                  variant="body2"
-                >
-                  Alejandro Marín Gomez
-          </Typography>
-          <Typography
-                  color="neutral.400"
-                  variant="body2"
-                >
-                  Luis Felipe Rendón
           </Typography>
           <div>
           <Box
