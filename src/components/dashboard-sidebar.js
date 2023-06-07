@@ -133,7 +133,7 @@ export const DashboardSidebar = (props) => {
                   color="inherit"
                   variant="subtitle1"
                 >
-                  ©2022
+                  ©2023
                 </Typography>
                 <Typography
                   color="inherit"
